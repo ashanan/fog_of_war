@@ -1,3 +1,5 @@
+var maskClicks = [{x: 10, y: 10}, {x:100, y: 70}];
+
 function draw(){
     var mapCanvas,
         mapContext,
@@ -8,14 +10,7 @@ function draw(){
     // create mask
     maskCanvas = document.getElementById('mask');
     maskContext = maskCanvas.getContext('2d');
-
-    // black out canvas
-    maskContext.fillStyle = '#f2e4b3';
-    maskContext.fillRect(0, 0, 350, 150);
-    // add a transparent section
-    // maskContext.fillStyle = 'rgba(225,225,225,1)';
-    // maskContext.fillRect(50,50,75,50);
-    maskContext.clearRect(50,50,75,50)
+    createMask(maskContext);
 
     // create background map
     mapCanvas = document.getElementById('map');
@@ -26,6 +21,19 @@ function draw(){
 
     // lay mask over
     mapContext.drawImage(maskCanvas, 0, 0);    
+}
+
+function createMask(context){
+    // black out canvas
+    context.fillStyle = '#f2e4b3';
+    context.fillRect(0, 0, 350, 150);
+
+    for(let i = 0;i < maskClicks.length;i++){
+        // add transparent sections
+        let x = maskClicks[i].x;
+        let y = maskClicks[i].y;
+        context.clearRect(x, y, 50, 50);
+    }
 }
 
 window.onload = draw;
