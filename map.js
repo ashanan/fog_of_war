@@ -1,5 +1,10 @@
 var maskClicks = [{x: 10, y: 10}, {x:100, y: 70}];
 
+function init(){
+    draw();
+    document.getElementById('map').addEventListener('click', mapClick, false);
+}
+
 function draw(){
     var mapCanvas,
         mapContext,
@@ -23,6 +28,10 @@ function draw(){
     mapContext.drawImage(maskCanvas, 0, 0);    
 }
 
+function mapClick(event){
+    console.log('click', event);
+}
+
 function createMask(context){
     // black out canvas
     context.fillStyle = '#f2e4b3';
@@ -36,5 +45,5 @@ function createMask(context){
     }
 }
 
-window.onload = draw;
+window.onload = init;
 
