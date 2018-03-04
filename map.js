@@ -1,8 +1,15 @@
-var maskClicks = [{x: 10, y: 10}, {x:100, y: 70}];
+var maskClicks = [];
+var map;
+var offsets;
 
 function init(){
+    map = document.getElementById('map');
+    offsets = {
+        left: map.offsetLeft,
+        top: map.offsetTop
+    };
     draw();
-    document.getElementById('map').addEventListener('click', mapClick, false);
+    map.addEventListener('click', mapClick, false);
 }
 
 function draw(){
@@ -29,7 +36,10 @@ function draw(){
 }
 
 function mapClick(event){
-    console.log('click', event);
+    let x = event.pageX - offsets.left;
+    let y = event.pageY - offsets.top;
+    maskClicks.push({x: x, y: y});
+    draw();
 }
 
 function createMask(context){
