@@ -49,8 +49,8 @@ function createMask(context){
 
     for(let i = 0;i < maskClicks.length;i++){
         // add transparent sections
-        let x = maskClicks[i].x;
-        let y = maskClicks[i].y;
+        let x = maskClicks[i].x - 25;
+        let y = maskClicks[i].y - 25;
         context.clearRect(x, y, 50, 50);
     }
 }
