@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+#map{
+  border: 1px solid black;
+}
+
+#mask{
+  border: 1px solid red;
+}

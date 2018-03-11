@@ -1,5 +1,9 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1= 'Fog of War'
+  p Please upload a map
+
+  img(id="img" src="images/map1.jpg")
+  canvas(id="map")
+  canvas(id="mask")
