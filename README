@@ -1,0 +1,7 @@
+Two kinds of users, map revealers and viewers, i.e. DMs and players
+
+As a DM, I want to be able to upload a map and slowly reveal it to my players.
+
+Home page: click "Create map"
+Map upload page: form with title, description and map image upload
+Map page(DM): Map on canvas
