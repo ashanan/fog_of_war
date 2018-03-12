@@ -2,6 +2,32 @@ var maskClicks = [];
 var map;
 var offsets;
 
+function handleImage(e){
+    var map = document.getElementById('map'),
+        ctx = map.getContext('2d'),
+        playerMap = document.getElementById('playerMap'),
+        mask = document.getElementById('mask');
+    
+    var reader = new FileReader();
+    reader.onload = function(event){
+        var img = new Image();
+        img.onload = function(){
+            map.width = img.width;
+            map.height = img.height;
+            ctx.drawImage(img,0,0);
+
+
+            playerMap.width = img.width;
+            playerMap.height = img.height;
+            mask.width = img.width;
+            mask.height = img.height;
+        }
+        img.src = event.target.result;
+    }
+    reader.readAsDataURL(e.target.files[0]);     
+}
+
+
 function init(){
     map = document.getElementById('map');
     offsets = {
@@ -10,6 +36,11 @@ function init(){
     };
     draw();
     map.addEventListener('click', mapClick, false);
+
+
+    var imageLoader = document.getElementById('imageLoader');
+        imageLoader.addEventListener('change', handleImage, false);
+
 }
 
 function draw(){
@@ -17,22 +48,23 @@ function draw(){
         mapContext,
         maskCanvas,
         maskContext,
-        mapImg;
+        mapImg,
+        playerMapCanvas,
+        playerMapContext;
 
     // create mask
     maskCanvas = document.getElementById('mask');
     maskContext = maskCanvas.getContext('2d');
-    createMask(maskContext);
+    createMask(maskCanvas, maskContext);
 
     // create background map
     mapCanvas = document.getElementById('map');
-    mapContext = mapCanvas.getContext('2d');
-
-    mapImg = document.getElementById('img');
-    mapContext.drawImage(mapImg, 0, 0);
+    playerMapCanvas = document.getElementById('playerMap')
+    playerMapContext = playerMapCanvas.getContext('2d');
+    playerMapContext.drawImage(mapCanvas, 0, 0);
 
     // lay mask over
-    mapContext.drawImage(maskCanvas, 0, 0);    
+    playerMapContext.drawImage(maskCanvas, 0, 0);    
 }
 
 function mapClick(event){
@@ -42,10 +74,10 @@ function mapClick(event){
     draw();
 }
 
-function createMask(context){
+function createMask(canvas, context){
     // black out canvas
     context.fillStyle = '#f2e4b3';
-    context.fillRect(0, 0, 350, 150);
+    context.fillRect(0, 0, canvas.width, canvas.height);
 
     for(let i = 0;i < maskClicks.length;i++){
         // add transparent sections

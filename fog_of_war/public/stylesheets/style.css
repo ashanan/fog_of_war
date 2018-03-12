@@ -12,5 +12,6 @@ a {
 }
 
 #mask{
-  border: 1px solid red;
+  visibility: hidden;
+  margin-top: -600px;
 }
