@@ -21,6 +21,13 @@ function handleImage(e){
             playerMap.height = img.height;
             mask.width = img.width;
             mask.height = img.height;
+
+            offsets = {
+                left: playerMap.offsetLeft,
+                top: playerMap.offsetTop
+            };
+
+            draw();
         }
         img.src = event.target.result;
     }
@@ -29,18 +36,13 @@ function handleImage(e){
 
 
 function init(){
-    map = document.getElementById('map');
-    offsets = {
-        left: map.offsetLeft,
-        top: map.offsetTop
-    };
-    draw();
-    map.addEventListener('click', mapClick, false);
-
-
     var imageLoader = document.getElementById('imageLoader');
-        imageLoader.addEventListener('change', handleImage, false);
+    imageLoader.addEventListener('change', handleImage, false);
 
+    map = document.getElementById('playerMap');
+    map.addEventListener('click', mapClick, false);
+    
+    draw();
 }
 
 function draw(){
@@ -68,6 +70,7 @@ function draw(){
 function mapClick(event){
     let x = event.pageX - offsets.left;
     let y = event.pageY - offsets.top;
+    
     maskClicks.push({x: x, y: y});
     draw();
 }

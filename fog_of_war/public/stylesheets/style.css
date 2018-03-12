@@ -8,7 +8,8 @@ a {
 }
 
 #map{
-  border: 1px solid black;
+  visibility: hidden;
+  margin-top: -600px;
 }
 
 #mask{
