@@ -45,10 +45,8 @@ function init(){
 
 function draw(){
     var mapCanvas,
-        mapContext,
         maskCanvas,
         maskContext,
-        mapImg,
         playerMapCanvas,
         playerMapContext;
 
